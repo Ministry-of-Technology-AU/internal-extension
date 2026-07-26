@@ -88,7 +88,7 @@ export async function scrapeCatalog(args: ScrapeArgs): Promise<ScrapeResult> {
   const records = rows.map((r: any) => ({
     courseTitle: r.Title || '',
     courseCode: r.DisplayCode || '',
-    credits: r.Credits == null ? '' : String(r.Credits),
+    credits: r.Credits == null || r.Credits === '' ? null : Number(r.Credits),
     faculty: r.Faculty || '',
     tfEmail: r.TF || '',
     taEmail: r.UGTAGA || '',

@@ -9,6 +9,7 @@ export interface CatalogRecord {
   courseCode: string;
   courseTitle: string;
   faculty: string;
+  credits: number | null;
   semester: string;
   year: string;
   description: string;
@@ -29,6 +30,7 @@ export interface MergedCourse {
   courseCode: string;
   courseTitle: string;
   faculty: string;
+  credits: number | null;
   classCounts: number;
   classDetails: string[];
   semester: string;
@@ -102,6 +104,7 @@ export function mergeResults(results: SyncResults): MergeOutput {
         .replaceAll("'", '&#39;')
         .replaceAll('"', '&#34;'),
       faculty: item.faculty || '',
+      credits: item.credits ?? null,
       // parseInt can yield NaN, which JSON.stringify silently turns into null.
       classCounts: t && Number.isFinite(t.classCounts) ? t.classCounts : 0,
       classDetails: rawDetails.length ? [rawDetails.map(cleanDetail).join(' ')] : [],
